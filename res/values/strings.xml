@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bio Maker</string>
+    <string name="action_settings">Settings</string>
+    <string name="enter_oil_quantity_label">Please enter your oil volume in litres</string>
+    <string name="first_dose_meth_litres_label">Required dose in litres:</string>
+    <string name="first_dose_KOH_label">Required KOH in grams:</string>
+    <string name="empty_string"></string>
+
+</resources>
