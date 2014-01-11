@@ -26,52 +26,54 @@ import android.widget.TextView;
 
 public class HomeScreen extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
-        String[] available_options = getNumPickerOptions();
-        NumberPicker num_picker = (NumberPicker)findViewById(R.id.oil_quantity_number_picker);
-        num_picker.setMinValue(0);
-        num_picker.setMaxValue(available_options.length -1);
-        num_picker.setWrapSelectorWheel(false);
-        num_picker.setDisplayedValues(getNumPickerOptions());
-        num_picker.setOnValueChangedListener(new OnValueChangeListener(){
-        	@Override
-        	public void onValueChange (NumberPicker picker, int oldVal, int newVal) {
-        		TextView firstDoseMeth = (TextView)findViewById(R.id.first_dose_meth_litres);
-        		TextView firstDoseKOH = (TextView)findViewById(R.id.first_dose_KOH);
-        		
-        		int oilQuantity = Integer.parseInt(picker.getDisplayedValues()[newVal]);
-        		
-        		firstDoseMeth.setText(Double.valueOf(calculateMethFirstBatch(oilQuantity)).toString());
-        		firstDoseKOH.setText(Double.valueOf(requiredKOH(oilQuantity)).toString());
-        	}
-        });
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_home_screen);
+		String[] available_options = getNumPickerOptions();
+		NumberPicker num_picker = (NumberPicker) findViewById(R.id.oil_quantity_number_picker);
+		num_picker.setMinValue(0);
+		num_picker.setMaxValue(available_options.length - 1);
+		num_picker.setWrapSelectorWheel(false);
+		num_picker.setDisplayedValues(getNumPickerOptions());
+		num_picker.setOnValueChangedListener(new OnValueChangeListener() {
+			@Override
+			public void onValueChange(NumberPicker picker, int oldVal,
+					int newVal) {
+				TextView firstDoseMeth = (TextView) findViewById(R.id.first_dose_meth_litres);
+				TextView firstDoseKOH = (TextView) findViewById(R.id.first_dose_KOH);
 
+				int oilQuantity = Integer.parseInt(picker.getDisplayedValues()[newVal]);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_screen, menu);
-        return true;
-    }
-    
-    private double calculateMethFirstBatch(int oilQuantity) {
-    	return oilQuantity * 0.7 * 0.15;
-    }
-    
-    private double requiredKOH(double litresOfMeth) {
-    	return litresOfMeth * 7;
-    }
-    
-    private String[] getNumPickerOptions() {
-    String[] nums = new String[21];
-    
-    for(int i=0; i<nums.length; i++) {
-       nums[i] = Integer.toString(i*5);
-    }
-    return nums;
-  }
+				firstDoseMeth.setText(Double.valueOf(
+						calculateMethFirstBatch(oilQuantity)).toString());
+				firstDoseKOH.setText(Double.valueOf(requiredKOH(oilQuantity))
+						.toString());
+			}
+		});
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.home_screen, menu);
+		return true;
+	}
+
+	private double calculateMethFirstBatch(int oilQuantity) {
+		return oilQuantity * 0.7 * 0.15;
+	}
+
+	private double requiredKOH(double litresOfMeth) {
+		return litresOfMeth * 7;
+	}
+
+	private String[] getNumPickerOptions() {
+		String[] nums = new String[21];
+
+		for (int i = 0; i < nums.length; i++) {
+			nums[i] = Integer.toString(i * 5);
+		}
+		return nums;
+	}
 }
