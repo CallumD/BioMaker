@@ -1,8 +1,13 @@
 package nu.mine.callum.biomaker;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.TextView;
@@ -24,7 +29,10 @@ import android.widget.TextView;
 //react for 45 - 60 mins and retest 10/90
 //If there is any drop out at all run pump with 2nd stage glyc in for a further 30 mins and check again
 
-public class HomeScreen extends Activity {
+public class HomeScreenActivity extends Activity {
+	
+	//public final int MILISECONDS_IN_NINETY_MINUITES = 5400000;
+	public final int MILISECONDS_IN_NINETY_MINUITES = 1000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,17 @@ public class HomeScreen extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home_screen, menu);
 		return true;
+	}
+
+	public void startFirstStage(View view) {
+		Timer beginFirstStageTimer = new Timer("Begin first stage timer");
+		beginFirstStageTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				Intent intent = new Intent(HomeScreenActivity.this, SecondStageActivity.class);
+				startActivity(intent);
+			}
+		}, 5000);
 	}
 
 	private double calculateMethFirstBatch(int oilQuantity) {

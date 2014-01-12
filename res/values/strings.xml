@@ -7,5 +7,7 @@
     <string name="first_dose_meth_litres_label">Required dose in litres:</string>
     <string name="first_dose_KOH_label">Required KOH in grams:</string>
     <string name="empty_string"></string>
+    <string name="start_first_stage_string">Begin first stage</string>
+    <string name="zero">0</string>
 
 </resources>

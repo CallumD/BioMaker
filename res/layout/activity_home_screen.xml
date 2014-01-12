@@ -6,47 +6,54 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".HomeScreen" >
+    tools:context=".HomeScreenActivity" >
 
     <TextView
         android:id="@+id/enter_oil_quantity_label_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_oil_quantity_label" />
-    
-	<NumberPicker
-	    android:id="@+id/oil_quantity_number_picker"
-	    android:width="100dip"
-	    android:layout_below="@id/enter_oil_quantity_label_id"
-	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-	
-	<TextView
+
+    <NumberPicker
+        android:id="@+id/oil_quantity_number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enter_oil_quantity_label_id"
+        android:width="100dip" />
+
+    <TextView
         android:id="@+id/first_dose_meth_litres_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/oil_quantity_number_picker"
         android:text="@string/first_dose_meth_litres_label" />
-	
-	<TextView
+
+    <TextView
         android:id="@+id/first_dose_meth_litres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/first_dose_meth_litres_label"
-        android:text="@string/empty_string" />
-	
-	<TextView
+        android:text="@string/zero" />
+
+    <TextView
         android:id="@+id/first_dose_KOH_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/first_dose_meth_litres"
         android:text="@string/first_dose_KOH_label" />
-	
-	<TextView
+
+    <TextView
         android:id="@+id/first_dose_KOH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/first_dose_KOH_label"
-        android:text="@string/empty_string" />
+        android:text="@string/zero" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startFirstStage"
+        android:layout_below="@id/first_dose_KOH"
+        android:text="@string/start_first_stage_string" />
+
 </RelativeLayout>
-	
