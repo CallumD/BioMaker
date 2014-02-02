@@ -4,8 +4,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.Menu;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -63,7 +69,6 @@ public class HomeScreenActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home_screen, menu);
 		return true;
 	}
@@ -73,10 +78,31 @@ public class HomeScreenActivity extends Activity {
 		beginFirstStageTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				Intent intent = new Intent(HomeScreenActivity.this, SecondStageActivity.class);
-				startActivity(intent);
+				NotificationCompat.Builder mBuilder = 
+						new NotificationCompat.Builder(HomeScreenActivity.this)
+				        .setContentTitle("Makin' Diesel")
+				        .setSmallIcon(R.drawable.ic_launcher)
+				        .setContentText("Your first stage is ready!");
+				
+				Intent resultIntent = new Intent(HomeScreenActivity.this, SecondStageActivity.class);
+				TaskStackBuilder stackBuilder = TaskStackBuilder.create(HomeScreenActivity.this);
+				
+				stackBuilder.addParentStack(SecondStageActivity.class);
+				stackBuilder.addNextIntent(resultIntent);
+				PendingIntent resultPendingIntent =
+				        stackBuilder.getPendingIntent(
+				            0,
+				            PendingIntent.FLAG_UPDATE_CURRENT
+				        );
+				mBuilder.setContentIntent(resultPendingIntent);
+				Notification notification = mBuilder.build();
+				notification.flags = Notification.FLAG_AUTO_CANCEL;
+				NotificationManager mNotificationManager =
+				    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotificationManager.notify(100, notification);
 			}
-		}, 5000);
+		}, MILISECONDS_IN_NINETY_MINUITES);
+		moveTaskToBack(true);
 	}
 
 	private double calculateMethFirstBatch(int oilQuantity) {
